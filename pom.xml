@@ -12,9 +12,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakarta.jaxb.version>4.0.2</jakarta.jaxb.version>
-        <jaxb2.maven.plugin.version>2.5.0</jaxb2.maven.plugin.version>
-        <xsd.directory>${project.basedir}/src/main/xsd</xsd.directory>
-        <generated.sources.directory>${project.basedir}/target/generated-sources/jaxb</generated.sources.directory>
+        <jaxb-maven-plugin.version>4.0.8</jaxb-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -33,71 +31,59 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>jaxb2-maven-plugin</artifactId>
-                <version>${jaxb2.maven.plugin.version}</version>
+                <groupId>org.jvnet.jaxb</groupId>
+                <artifactId>jaxb-maven-plugin</artifactId>
+                <version>${jaxb-maven-plugin.version}</version>
                 <configuration>
                     <extension>true</extension>
                 </configuration>
                 <executions>
-                    <!-- Generates Java classes for nomination XSD -->
                     <execution>
-                        <id>xjc-nomination</id>
+                        <id>nomination</id>
                         <goals>
-                            <goal>xjc</goal>
+                            <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <sources>
-                                <source>${xsd.directory}/210-nomination-kiesraad-strict.xsd</source>
-                            </sources>
-                            <outputDirectory>${generated.sources.directory}/nomination</outputDirectory>
-                            <packageName>nl.hva.se.p202.team1.elections.model.nomination</packageName>
-                            <clearOutputDir>false</clearOutputDir>
+                            <schemaDirectory>${project.basedir}/src/main/resources</schemaDirectory>
+                            <schemaIncludes>
+                                <schemaInclude>210-nomination-kiesraad-strict.xsd</schemaInclude>
+                            </schemaIncludes>
                         </configuration>
                     </execution>
-                    <!-- Generates Java classes for candidatelist XSD -->
                     <execution>
-                        <id>xjc-candidatelist</id>
+                        <id>candidatelist</id>
                         <goals>
-                            <goal>xjc</goal>
+                            <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <sources>
-                                <source>${xsd.directory}/230-candidatelist-kiesraad-strict.xsd</source>
-                            </sources>
-                            <outputDirectory>${generated.sources.directory}/candidatelist</outputDirectory>
-                            <packageName>nl.hva.se.p202.team1.elections.model.candidatelist</packageName>
-                            <clearOutputDir>false</clearOutputDir>
+                            <schemaDirectory>${project.basedir}/src/main/resources</schemaDirectory>
+                            <schemaIncludes>
+                                <schemaInclude>230-candidatelist-kiesraad-strict.xsd</schemaInclude>
+                            </schemaIncludes>
                         </configuration>
                     </execution>
-                    <!-- Generates Java classes for count XSD -->
                     <execution>
-                        <id>xjc-count</id>
+                        <id>count</id>
                         <goals>
-                            <goal>xjc</goal>
+                            <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <sources>
-                                <source>${xsd.directory}/510-count-kiesraad-strict.xsd</source>
-                            </sources>
-                            <outputDirectory>${generated.sources.directory}/count</outputDirectory>
-                            <packageName>nl.hva.se.p202.team1.elections.model.count</packageName>
-                            <clearOutputDir>false</clearOutputDir>
+                            <schemaDirectory>${project.basedir}/src/main/resources</schemaDirectory>
+                            <schemaIncludes>
+                                <schemaInclude>510-count-kiesraad-strict.xsd</schemaInclude>
+                            </schemaIncludes>
                         </configuration>
                     </execution>
-                    <!-- Generates Java classes for result XSD -->
                     <execution>
-                        <id>xjc-result</id>
+                        <id>result</id>
                         <goals>
-                            <goal>xjc</goal>
+                            <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <sources>
-                                <source>${xsd.directory}/520-result-kiesraad-strict.xsd</source>
-                            </sources>
-                            <outputDirectory>${generated.sources.directory}/result</outputDirectory>
-                            <packageName>nl.hva.se.p202.team1.elections.model.result</packageName>
-                            <clearOutputDir>false</clearOutputDir>
+                            <schemaDirectory>${project.basedir}/src/main/resources</schemaDirectory>
+                            <schemaIncludes>
+                                <schemaInclude>520-result-kiesraad-strict.xsd</schemaInclude>
+                            </schemaIncludes>
                         </configuration>
                     </execution>
                 </executions>
